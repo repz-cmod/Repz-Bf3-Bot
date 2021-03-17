@@ -15,7 +15,7 @@ client = commands.Bot(command_prefix='!', intents=intents)
 #for future ideas. filling your main bot.py with too many event/command handlers makes it harder to oversee
 #I have provided a simple cog which makes it easier to add features
 
-#client.load_extension("cogs.repz_bf3")
+
 
 #as the bot goes online, status of bot changes to server stats.
 #ToDo: iterate through the method every 2 seconds so it updates.
@@ -28,7 +28,7 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle, activity=discord.Game(str(count) + " / 64 Players"))
     print("Ready")
 
-
+client.load_extension("cogs.repz_bf3")
 #store your token in a .env file. Never hardcode tokens into source
 #I have provided necessary code above.
 client.run()
