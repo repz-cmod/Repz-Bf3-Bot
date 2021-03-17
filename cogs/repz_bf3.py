@@ -12,7 +12,10 @@ class repz_bf3(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get('https://bf3.zloemu.net/servers?id=31197&json') as r:
                 js = await r.json(content_type='text/html')
-        await ctx.send(js['players'])
+        count = len(js['players'])
+        embed=discord.Embed(title="RepZ Bf3 Server Players", color=0x3866f0)
+        embed.add_field(name=js['players'], value=f"{str(count)} of 64 players playing", inline=False)
+        await ctx.send(embed=embed)
 
         
 def setup(bot):
