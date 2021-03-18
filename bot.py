@@ -18,15 +18,21 @@ client = commands.Bot(command_prefix='!', intents=intents)
 
 
 #as the bot goes online, status of bot changes to server stats.
-#ToDo: iterate through the method every 2 seconds so it updates.
+#
 @client.event
 async def on_ready():
+    status.start()
+    print("Ready")
+#this task iterates through the function every 5 seconds updating the status.
+@tasks.loop(seconds=5)
+async def status():
+
     async with aiohttp.ClientSession() as session:
         async with session.get('https://bf3.zloemu.net/servers?id=31197&json') as r:
             js = await r.json(content_type='text/html')
     count = len(js['players'])
     await client.change_presence(status=discord.Status.idle, activity=discord.Game(str(count) + " / 64 Players"))
-    print("Ready")
+
 
 client.load_extension("cogs.repz_bf3")
 #store your token in a .env file. Never hardcode tokens into source
