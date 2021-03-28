@@ -37,4 +37,8 @@ async def status():
 client.load_extension("cogs.repz_bf3")
 #store your token in a .env file. Never hardcode tokens into source
 #I have provided necessary code above.
-client.run()
+def main():
+    client.run()
+
+if __name__ == "__main__":
+    main()
