@@ -10,6 +10,7 @@ class repz_admin(commands.Cog):
     #!!!!Don't use this. It lacks role restrictions!!!!!
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     @commands.command(name="kick")
+    @commands.has_permissions(kick_members=True)
     async def userkick(self, ctx,  member: discord.Member, *, reason=None):
         try:
             await member.kick(reason=reason)
@@ -18,6 +19,7 @@ class repz_admin(commands.Cog):
             await ctx.send("Something went wrong. Check the logs!")
 
     @commands.command(name="ban")
+    @commands.has_permissions(ban_members=True)
     async def userban(self, ctx, member: discord.Member, *, reason=None):
         try:
             if reason == None:
@@ -29,6 +31,7 @@ class repz_admin(commands.Cog):
             await ctx.send("Something went wrong. Check the logs!")
 
     @commands.command(name="tempban")
+    @commands.has_permissions(ban_members=True)
     async def usertban(self, ctx, member: discord.Member, *, duration=None, reason=None):
         try:
             if reason == None or duration == None:
@@ -40,10 +43,6 @@ class repz_admin(commands.Cog):
                 await member.unban()
         except:
             await ctx.send("Something went wrong check the logs")
-
-
-
-
 
 def setup(bot):
     bot.add_cog(repz_admin(bot))
