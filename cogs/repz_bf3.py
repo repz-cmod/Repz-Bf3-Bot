@@ -9,6 +9,7 @@ class repz_bf3(commands.Cog):
         
     @commands.command(name="bf3stats")
     async def gun_stats(self, ctx, playername):
+        #displays ZLO bf3 stats in generated picture
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://bf3.zloemu.net/json?name={playername}') as r:
                 js = await r.json(content_type= 'text/html')
@@ -43,10 +44,12 @@ class repz_bf3(commands.Cog):
         #      Saves image     #
         ########################
         image.save('stats.png')
+        #to avoid taking up lots of hdd space it deletes old stats.png when command is issued
         await ctx.send(file=discord.File('stats.png'))
 
     @commands.command(name="players")
     async def on_players(self, ctx):
+        #displays stats in embed in chat
         async with aiohttp.ClientSession() as session:
             async with session.get('https://bf3.zloemu.net/servers?id=31197&json') as r:
                 js = await r.json(content_type='text/html')
