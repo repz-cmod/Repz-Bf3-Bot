@@ -26,8 +26,8 @@ async def on_ready():
 #this task iterates through the function every 5 seconds updating the status.
 @tasks.loop(seconds=5)
 async def status():
-
     async with aiohttp.ClientSession() as session:
+        #bot status players on server
         async with session.get('https://bf3.zloemu.net/servers?id=31197&json') as r:
             js = await r.json(content_type='text/html')
     count = len(js['players'])
@@ -35,7 +35,6 @@ async def status():
 
 
 client.load_extension("cogs.repz_bf3")
-client.load_extension("cogs.admin")
 #store your token in a .env file. Never hardcode tokens into source
 #I have provided necessary code above.
 def main():
